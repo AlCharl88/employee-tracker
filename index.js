@@ -99,19 +99,24 @@ const connection = mysql.createConnection({
                     connection.query(query1, (err,res) => {
                     if(err) throw err;
                     res.forEach(({ manager }) => managers.push(manager));
-                    });
                     addEmp(roles, managers);
+                    });
                 break;
                 
-                case 'Delete Department':
-                    delDep();
-                    break;
-                case 'Delete Role':
-                    delRole();
-                    break;
                 case 'Delete Employee':
+                    const query = `SELECT CONCAT(first_name, " " , last_name) as employee FROM employee ORDER BY last_name`;
+                    connection.query(query, (err,res) => {
+                    if(err) throw err;
+                    res.forEach(({ employee }) => employees.push(employee));
                     DelEmp();
+                    });
                     break;
+                // case 'Delete Department':
+                //     delDep();
+                //     break;
+                // case 'Delete Role':
+                //     delRole();
+                //     break;
                 case 'Update Employee Role':
                     UpdEmpRole();
                     break;
