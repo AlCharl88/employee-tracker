@@ -10,14 +10,15 @@ const connection = mysql.createConnection({
     port: 3306,
     user: 'root',
     password: 'Joyce_Stacy_20&',
-    database: 'employees',
+    database: 'employees_db',
   });
 
   connection.connect((err) => {
     if (err) throw err;
-    console.log(`connected as id ${connection.threadId}\n`);
+    // console.log(`connected as id ${connection.threadId}\n`);
     promptUser();
   });
+  
 
   const promptUser = async () => {
       inquirer.prompt([
@@ -380,8 +381,13 @@ const connection = mysql.createConnection({
   
   const displayTable = (data) => {
     console.log(table.getTable(data));
-    promptUser();
+    promptUser()
   };
+
+  
+
+  
+  
 
 
   
