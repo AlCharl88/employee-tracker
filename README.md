@@ -2,8 +2,6 @@
 
 ![Badge for GitHub](https://img.shields.io/github/languages/top/AlCharl88/undefined?style=flat&logo=appveyor) 
 
-![header](./public/assets/images/header.jpg)
-
 
   ## Table of Content 
 
