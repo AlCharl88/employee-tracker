@@ -66,7 +66,7 @@ const connection = mysql.createConnection({
                     addDep();
                 break;
 
-                case 'add Role':
+                case 'Add Role':
                     connection.query(`SELECT name FROM department`, (err,res) => {
                     if(err) throw err;
                     res.forEach(({name}) => departments.push(name));
@@ -74,7 +74,7 @@ const connection = mysql.createConnection({
                     });
                 break;
 
-                case 'add Employee':
+                case 'Add Employee':
                     connection.query(`SELECT title FROM role ORDER BY title`, (err,res) => {
                     if(err) throw err;
                     res.forEach(({title}) => roles.push(title));
@@ -145,13 +145,13 @@ const connection = mysql.createConnection({
         name: 'employee',
         type: 'list',
         message: 'Select the employee you want to change',
-        choices: employees
+        choices: employees,
       },
       {
         name: 'manager',
         type: 'list',
         message: 'Select the manager you want to assign to this employee!',
-        choices: managers
+        choices: managers,
       }
     ]).then((data) => {
     
@@ -174,13 +174,13 @@ const connection = mysql.createConnection({
         name: 'employee',
         type: 'list',
         message: 'Select the employee for which you want the role to change',
-        choices: employees
+        choices: employees,
       },
       {
         name: 'role',
         type: 'list',
         message: 'Select the role you want to assign to this employee',
-        choices: roles
+        choices: roles,
       }
     ]).then((data)=> {
         connection.query(`UPDATE employee SET role_id = (SELECT id FROM role WHERE title = "${data.role}") WHERE CONCAT(first_name, " " , last_name) = "${data.employee}"`, (err,res)=> {
@@ -199,7 +199,7 @@ const connection = mysql.createConnection({
         name: 'employee',
         type: 'list',
         message: 'Select the employee you want to delete',
-        choices: employees
+        choices: [employees]
       }
     ]).then((data)=> {
         connection.query(`DELETE FROM employee WHERE CONCAT(first_name, " " , last_name) = "${data.employee}"`, (err,res)=> {
@@ -245,7 +245,7 @@ const connection = mysql.createConnection({
         name: 'dept',
         type: 'list',
         message: 'Which department will benefit the role?',
-        choices: departments
+        choices: departments,
       }
     ]).then((data) =>{
       connection.query(`INSERT INTO role(title,salary,department_id) VALUES ("${data.role}",${data.salary},
