@@ -44,7 +44,8 @@ const connection = mysql.createConnection({
                 case 'View employees by Manager':
                     connection.query(`SELECT CONCAT(first_name, " ", last_name) AS manager FROM employee WHERE manager_id IS NULL ORDER BY last_name`, (err,res) => {
                     if(err) throw err;
-                    viewEmpMan(res);
+                    res.forEach(({manager}) => managers.push(manager));
+                    viewEmpMan(managers);
                     });
                 break;
                 
@@ -91,7 +92,7 @@ const connection = mysql.createConnection({
                     connection.query(`SELECT CONCAT(first_name, " " , last_name) as employee FROM employee ORDER BY last_name`, (err,res) => {
                     if(err) throw err;
                     res.forEach(({employee}) => employees.push(employee));
-                    DelEmp();
+                    DelEmp(employees);
                     });
                 break;
                 
